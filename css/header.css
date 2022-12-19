@@ -1,0 +1,112 @@
+@import "../css/style.css";
+.header-logo {
+    float: left;
+  }
+  
+  .header-logo img {
+    display: block;
+    align-self: center;
+  }
+  
+  .main-navbar {
+    float: right;
+    position: relative;
+  }
+  
+  .topnav {
+    margin: 3.5%;
+    background-attachment: fixed;
+    height: 50px;
+  }
+  .topnav a {
+    float: left;
+    display: block;
+    color: var(--color-black);
+    text-align: center;
+    padding: 12px 12px;
+    margin: 5px;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: Roboto, sans-serif;
+  }
+  
+  /* can delete .topnav a.active */
+  .topnav a.active,
+  .topnav a:hover {
+    background-color: var(--bg-red-primary);
+    color: var(--color-white);
+    border-radius: 15px;
+  }
+  
+  .topnav .icon {
+    display: none;
+  }
+  
+  .topnav .icon .fa {
+    color: var(--bg-red-primary);
+  }
+  
+  /* responsive 992px */
+  
+  @media screen and (max-width: 992px) {
+    .header-logo {
+      min-height: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .main-navbar {
+      display: flex;
+      flex-direction: column;
+      max-width: 60%;
+      background-color: var(--color-white);
+    }
+    .topnav a {
+      display: none;
+    }
+    .topnav a.icon {
+      float: right;
+      display: block;
+      width: 43px;
+      align-self: flex-end;
+    }
+    
+    .topnav.responsive {
+      position: relative;
+    }
+    .topnav.responsive .icon {
+      position: relative;
+      right: 0;
+      top: 0;
+      z-index: 1;
+    }
+    .topnav.responsive a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+  }
+  
+  /* responsive 590px */
+  
+  @media screen and (max-width: 590px) {
+    .header-logo img {
+      width: 200px;
+    }
+  }
+  
+  /* responsive 540px */
+
+  @media screen and (max-width: 540px) {
+    .header-logo img {
+      margin: 0;
+      width: 145px;
+    }
+  }
+  
+  /* responsive 400px */
+  
+  @media screen and (max-width: 400px) {
+    .header-logo img {
+      width: 115px;
+    }
+  }
