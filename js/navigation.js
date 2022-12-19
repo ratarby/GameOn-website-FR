@@ -4,7 +4,6 @@
   
   // listen btnClickMenu with callback function
   btnClickMenu.addEventListener("click", () => {
-    // test
     editNav();
   });
   
