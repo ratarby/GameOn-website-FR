@@ -222,13 +222,7 @@ if (firstNameChecked == true            // si toutes les conditions remplissent 
 // je récupère la constante confirmation et je lui déclare le propriété CSS "style.display" = 'flex' pour afficher le message de remerciement
     confirmation.style.display = "flex";
 
-    console.log('Prénom : ' + firstNameChecked);
-    console.log('Nom : ' + lastNameChecked);
-    console.log('Date de naissance : ' + firstNameChecked);
-    console.log('email : ' + emailChecked);
-    console.log('Nombre : ' + quantityChecked);
-    console.log('Ville : ' + firstNameChecked);
-    console.log('conditions : ' + firstNameChecked);
+
 };
 };
 
