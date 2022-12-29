@@ -566,3 +566,10 @@ main {
     font-size: 16px;
   }
   
+  /*error*/
+
+  .error {
+    color:var(--bg-red-primary); 
+    font-size : 15px; 
+    margin-top :8px;
+  }
