@@ -567,9 +567,18 @@ main {
   }
   
   /*error*/
-
+  
   .error {
     color:var(--bg-red-primary); 
     font-size : 15px; 
     margin-top :8px;
   }
+  .border-red {
+    border: solid red 2px;
+    margin-bottom:10px;
+  }
+  
+
+
+
+

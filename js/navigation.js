@@ -5,6 +5,7 @@
   // listen btnClickMenu with callback function
   btnClickMenu.addEventListener("click", () => {
     editNav();
+
   });
   
   // function editNav
@@ -15,4 +16,6 @@
       } else {
         x.className = "topnav";
       }
+
+      
     }

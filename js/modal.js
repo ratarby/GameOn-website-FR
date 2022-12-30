@@ -11,7 +11,9 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
     modalbg.style.display = "block";
-
+    confirmation.style.display = "none"
+    form.style.display = 'block';
+    
 }
 //===============================================================
 //======================== VARIABLES ============================
@@ -76,23 +78,12 @@ const confirmation = document.getElementById('confirmation');
 const confirmationCloseBtn = document.getElementsByClassName('btn-close');
 
 
-// ===================================== REGEX =====================================
 
-//  regex firstName ==> /^\S[a-za-zàáâäçèéêëìíîïñòóôöùúûüA-Z-\s]{2,}$/
-// ne commence pas par un espace + composé de caractères de a à z ou de A à Z + accents autorisés + au moins 2 caractères
-//  regex lastName ==>  /^\S[a-za-zàáâäçèéêëìíîïñòóôöùúûüA-Z-\s]{2,}$/
-//  regex email ==>  /^([a-z0-9]+(?:[._-][a-z0-9]+)*)@([a-z0-9]+(?:[.-][a-z0-9]+)*\.[a-z]{2,})$/
-//  regex birthDay ==>  = /^[0-9]{4}([\-/ \.])[0-9]{2}[\-/ \.][0-9]{2}$/
-//  regex quantity ==>  /^[0-9]{1,}$/
-
-
-//==================================================================================
-//=================== ECOUTE & VERIFICATION DU FORMULAIRE au 'SUBMIT' ==============
-//==================================================================================
 
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
+    
 
     formVerify();
 });
@@ -120,11 +111,12 @@ function formVerify() {
         || firstNameValue == null // ou condition si firstNameValue est égale à valeur null
         || firstNameValue.length < 2) // ou condition si firstNameValue est strictement inférieur à 2 caractères.
     { // je rentre les arguments suivant
-        errorFirst.innerText = 'Veuillez saisir votre Prénom avec plus de 2 caractères'; // ajout texte
-        setError();
-        setErrorFirst();
+        errorFirst.innerText = 'Veuillez saisir votre Prénom avec plus de 2 caractères';// ajout texte
+        
+        firstName.classList.add('border-red');
     } else { // sinon je rentre les arguments suivant avec une condition vraie
-        setSuccessFirst();
+        errorFirst.style.display = 'none';
+        firstName.classList.remove('border-red');
         firstNameChecked = true; // valeur booleenne = true
     };
     // regex --> ne commence pas par un espace + composé de caractères de a à z ou de A à Z + accents autorisés + au moins 2 caractères
@@ -133,38 +125,41 @@ function formVerify() {
         || lastNameValue == null
         || lastNameValue.length < 2) {
         errorLast.innerText = 'Veuillez saisir votre Nom avec plus de 2 caractères';
-        setError();
-        setErrorLast();
+        document.getElementsByClassName('.error');
+        lastName.classList.add('border-red');;
     } else {
-        setSuccessLast();
+        errorLast.style.display = 'none';
+        lastName.classList.remove('border-red');
         lastNameChecked = true;
     };
     // le regex testera l'email saisie par l'utilisateur
     if (!/^([a-z0-9]+(?:[._-][a-z0-9]+)*)@([a-z0-9]+(?:[.-][a-z0-9]+)*\.[a-z]{2,})$/.test(emailValue)) {
         errorEmail.innerText = 'Veuillez renseigner une addresse mail valide';
-        setError();
-        setErrorEmail();
+        document.getElementsByClassName('.error');
+        eMail.classList.add('border-red');
     } else {
-        setSuccessMail();
+        errorEmail.style.display = 'none';
+        eMail.classList.remove('border-red')
         emailChecked = true;
     };
     // le regex va vérifier que l'utilisateur entre bien une daez fr nai
     if (!birthDateValue.match(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/)) {
         errorBirth.innerText = 'Veuillez saisir votre date de Naissance';
-        setError();
-        setErrorBirth();
-
+        document.getElementsByClassName('.error');
+        birthDate.classList.add('border-red');
     } else {
-        setSuccessBirth();
+        errorBirth.style.display = 'none';
+        birthDate.classList.remove('border-red');
         birthDateChecked = true;
     };
     // le regex va vérifier que l'utilisateur entre bien un nondre
     if (!quantityValue.match(/^[0-9]{1,}$/)) {
         errorQuantity.innerText = 'Un nombre est requis';
-        setError();
-        setErrorQuantity();
+        document.getElementsByClassName('.error');
+        quantity.classList.add('border-red');
     } else {
-        setSuccessQuantity();
+        errorQuantity.style.display = 'none';
+        quantity.classList.remove('border-red');
         quantityChecked = true;
     };
 
@@ -175,7 +170,6 @@ function formVerify() {
         && !location5.checked
         && !location6.checked) {
         errorCity.innerText = 'Veuillez renseigner une ville';
-        setError();
         errorCity.style.marginBottom = '10px';
 
     } else {
@@ -185,7 +179,6 @@ function formVerify() {
 
     if (!validCheckbox1.checked) {
         errorValidation1.innerText = 'Veuillez accepter les termes et les conditions';
-        setError();
         errorValidation1.style.marginBottom = '10px';
     } else {
         errorValidation1.style.display = 'none';
@@ -201,67 +194,24 @@ function formVerify() {
         && radioChecked
         && conditionsChecked
         && birthDateChecked) { // alors
-        resetForm(); // ajout forl reset
         // je récupère la constante form et je lui declare  la propriété CSS "style.display" = 'none' pour cacher l' élément form
         form.style.display = "none";
         // je récupère la constante confirmation et je lui déclare le propriété CSS "style.display" = 'flex' pour afficher le message de remerciement
         confirmation.style.display = "flex";
     };
-};
+}
 
 // #4 Close confirmation
-
-confirmationCloseBtn[0].addEventListener("click", closeModal);
-
-// functions
-function setError() {
-    document.getElementsByClassName('.error');
-}
-function setErrorFirst() {
-    firstName.style.border = 'solid #ff0000 2px'; // ajout d'une border
-    firstName.style.marginBottom = '10px'; // ajout d'une marginBottom
-}
-function setSuccessFirst() {
-    errorFirst.style.display = 'none'; // ajout déclaration propriété CSS display none pour cacher l'élémént
-    firstName.style.border = 'none'; // ajout déclaration propriété CSS border none pour enlever la bordure
-}
-function setErrorLast() {
-    lastName.style.border = 'solid red 2px';
-    lastName.style.marginBottom = '10px';
-}
-function setSuccessLast() {
-    errorLast.style.display = 'none';
-    lastName.style.border = 'none';
-}
-function setErrorEmail() {
-    eMail.style.border = 'solid red 2px';
-    eMail.style.marginBottom = '10px';
-}
-function setSuccessMail() {
-    errorEmail.style.display = 'none';
-    eMail.style.border = 'none';
-}
-function setErrorBirth() {
-    birthDate.style.border = 'solid red 2px';
-    birthDate.style.marginBottom = '10px';
-}
-function setSuccessBirth() {
-    errorBirth.style.display = 'none';
-    birthDate.style.border = 'none';
-}
-function setErrorQuantity() {
-    quantity.style.border = 'solid red 2px';
-    quantity.style.marginBottom = '10px';
-}
-function setSuccessQuantity() {
-    errorQuantity.style.display = 'none';
-    quantity.style.border = 'none';
-}
-
-
-function resetForm() {
+confirmationCloseBtn[0].addEventListener("click", () => {
+    // reset du formulaire
     document.getElementById('form').reset();
-}
+    // ferme le modal 
+    closeModal();
+    // rafraichi la page
+    window.location.reload()
+});
+
+
 
 
 
